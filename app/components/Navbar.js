@@ -208,6 +208,7 @@ class Navbar extends React.Component {
               </ul>
             </li>
             <li><Link to='/add'>Add</Link></li>
+            <li><Link to="/test">Test</Link></li>
           </ul>
         </div>
       </nav>
