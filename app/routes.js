@@ -7,6 +7,7 @@ import Character from './components/Character';
 import CharacterList from './components/CharacterList';
 import Stats from './components/Stats';
 import Test from './components/Test';
+import AjaxTest from './components/AjaxTest';
 
 
 export default (
@@ -17,6 +18,7 @@ export default (
     <Route path='/shame' component={CharacterList} />
     <Route path='/stats' component={Stats} />
 		<Route path='/test' component={Test} />
+    <Route path='/ajax-test' component={AjaxTest} />
     <Route path=':category' component={CharacterList}>
       <Route path=':race' component={CharacterList}>
         <Route path=':bloodline' component={CharacterList} />

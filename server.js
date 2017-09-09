@@ -14,6 +14,7 @@ var _ = require('underscore');
 
 var mongoose = require('mongoose');
 var Character = require('./models/character');
+var Test = require('./models/ajaxtest');
 var config = require('./config');
 var async = require('async');
 var request = require('request');
@@ -37,6 +38,14 @@ app.use(express.static(path.join(__dirname, 'public')));
  * GET /api/characters
  * Returns 2 random characters of the same gender that have not been voted yet.
  */
+
+app.get('/api/ajax/count', function(req, res, next) {
+  Test.count({}, function(err, count) {
+    if (err) return next(err);
+    res.send({ count: count });
+  });
+});
+
 app.get('/api/characters', function(req, res, next) {
   var choices = ['Female', 'Male'];
   var randomGender = _.sample(choices);
@@ -423,6 +432,18 @@ app.post('/api/report', function(req, res, next) {
       if (err) return next(err);
       res.send({ message: character.name + ' has been reported.' });
     });
+  });
+});
+
+app.post('/api/ajax', function(req, res, next) {
+  const result = req.body.result;
+  var test = new Test ({
+    result: result,
+  });
+
+  test.save(function(err) {
+    if (err) return next(err);
+    res.send({ message: 'result has been added successfully!', result: test });
   });
 });
 
